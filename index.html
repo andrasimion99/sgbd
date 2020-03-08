@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Tema 2 PSGBD</title>
+</head>
+
+<body>
+  <h1>Tema 2 PSGBD</h1>
+  <p>Order data by a field(asc/desc)</p>
+  <form action="http://localhost:1234/order" method="GET">
+    <!-- <button id="myButton">Click me!</button> -->
+    <input type="text" name="camp" placeholder="dati un camp" required>
+    <input type="text" name="ord" placeholder="ordonare asc/desc" required>
+    <button type="submit" >ORDER DATA</button>
+  </form>
+
+  <br>
+  <p>Filter data by a field and its value</p>
+  <form action="http://localhost:1234/filter" method="GET">
+    <input type="text" name="camp" placeholder="dati un camp" required>
+    <input type="text" name="an" placeholder="dati un valoare" required>
+    <button type="submit" >FILTER DATA</button>
+  </form>
+
+</body>
+
+</html>
