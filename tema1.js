@@ -70,6 +70,39 @@ async function run() {
         }
       });
     });
+
+    app.get('/name', (req, res) => {
+      var nume = req.query.nume;
+      var prenume = req.query.prenume;
+      oracledb.getConnection({
+        user: "student",
+        password: mypw,
+        connectString: "localhost:1521"
+      }, function (err, connection) {
+        if (err) {
+          console.log(err);
+        } else {
+          connection.execute(
+            `SELECT * FROM studenti where nume = :nume and prenume = :prenume`, { nume: { val: nume }, prenume: { val: prenume } }, function (err, result) {
+              if (err) {
+                console.log(err);
+              } else {
+                var obj;
+                if (result.rows.length == 0) {
+                  obj = "Nu exista nici un student cu numele si prenumele introduse";
+                  res.send(obj)
+                } else {
+                  obj = "Am gasit studentul";
+                  for (i = 0; i < Object.keys(result.rows[0]).length; i++) {
+                    obj += "<p>" + Object.keys(result.rows[0])[i] + " : " + result.rows[0][Object.keys(result.rows[0])[i]] + "</p>"
+                  }
+                  res.send(obj)
+                }
+              }
+            });
+        }
+      });
+    });
   } catch (err) {
     console.error(err);
   } finally {
